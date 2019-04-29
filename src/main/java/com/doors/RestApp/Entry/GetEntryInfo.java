@@ -30,6 +30,7 @@ public class GetEntryInfo {
    @RequestMapping(method = RequestMethod.POST,value = "/addentries")
    public void addentry(@RequestBody Entry entry,@RequestParam (value = "visitor",required = true) String v_id,@RequestParam (value = "resident",required = true) String r_id )
    {
+       entry.setUid(entry.getUid());
        entry.setVisitor(new Visitor(v_id,"","",""));
        entry.setResident(new Resident(r_id,"",""));
        entry.setCheckin(LocalDateTime.now());

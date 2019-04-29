@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Entity
 public class Entry {
@@ -19,6 +20,7 @@ public class Entry {
     private String checkout;
     @ManyToOne
     private Resident resident;
+    private static AtomicLong idCounter = new AtomicLong();
 
     public Entry()
     {}
@@ -32,7 +34,9 @@ public class Entry {
     }
 
     public String getUid() {
-        return uid;
+
+        String prefix ="DE";
+        return (prefix + String.valueOf(idCounter.addAndGet(1)));
     }
 
     public void setUid(String uid) {
